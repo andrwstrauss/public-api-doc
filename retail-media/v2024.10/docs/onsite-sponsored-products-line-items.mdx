@@ -60,7 +60,7 @@ import { EndpointBadge } from "/snippets/EndpointBadge.jsx";
 <ResponseField name="name" required>
 **Data Type:** string
 
-**Description:** Line item name; must be unique within a [campaign](/retail-media/docs/campaigns-endpoints)
+**Description:** Line item name; must be unique within a [campaign](/retail-media/docs/campaigns)
 
 **Accepted Value:** 255 char limit
 
@@ -242,7 +242,7 @@ import { EndpointBadge } from "/snippets/EndpointBadge.jsx";
 <ResponseField name="status">
 **Data Type:** enum
 
-**Description:** Line item status; can only be updated by a user to `active` or `paused`; all other values are applied automatically depending on flight dates, financials, or missing attributes required for line item to serve. To understand the conditions that will cause a status to change, check out our [status page](/retail-media/docs/campaign-lineitem-status).
+**Description:** Line item status; can only be updated by a user to `active` or `paused`; all other values are applied automatically depending on flight dates, financials, or missing attributes required for line item to serve. To understand the conditions that will cause a status to change, check out our [status page](/retail-media/docs/line-items#lifecycle).
 
 **Accepted Value:** `active`, `paused`, `scheduled`, `ended`, `budgetHit`, `noFunds`, `draft`, `archived`
 
