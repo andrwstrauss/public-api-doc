@@ -44,6 +44,26 @@ flowchart LR
 
 * **Campaign status ← Line Item status.** Campaign status isn't set directly — it's derived: a campaign is `active` if at least one of its line items is `active`, otherwise `inactive`. See [Campaigns](/retail-media/docs/campaigns#status) and [Line Items](/retail-media/docs/line-items#lifecycle) for the full status tables.
 
+## Two funding paths
+
+The entities are the same either way — Balance, Campaign, Line Item — but which balance you attach determines the order you're free to do things in.
+
+<Columns cols={2}>
+  <Card title="Self-funded">
+    1. Pick a retailer whenever it suits you — before or after creating the campaign.
+    2. Attach any self-funded balance; it isn't retailer-scoped.
+    3. Mix line items for different retailers within the same campaign.
+  </Card>
+
+  <Card title="Retailer-billed">
+    1. The retailer is already decided: it's fixed on the balance (`retailerId`), which you can only retrieve via `GET /balances`, not create.
+    2. Every campaign drawing on that balance must set the matching `retailerId` at creation.
+    3. Every line item under that campaign must target that same retailer — no mixing.
+  </Card>
+</Columns>
+
+Get the funding model wrong for your workflow and you'll hit `RetailerMismatchWithBalance` at campaign creation. See [Balances](/retail-media/docs/balances#retailer-billed-balances) for the full comparison and error codes.
+
 ## Where to go next
 
 | Entity | Guide |
