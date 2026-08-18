@@ -285,8 +285,7 @@
                               "retail-media/docs/recommended-categories",
                               "retail-media/docs/recommended-keywords"
                             ]
-                          },
-                          "retail-media/docs/budget-overrides"
+                          }
                         ]
                       },
                       {
@@ -554,8 +553,7 @@
                               "retail-media/docs/recommended-categories",
                               "retail-media/docs/recommended-keywords"
                             ]
-                          },
-                          "retail-media/docs/budget-overrides"
+                          }
                         ]
                       },
                       {
@@ -2678,6 +2676,7 @@
     { "source": "/retail-media/docs/campaign", "destination": "/retail-media/docs/campaigns" },
     { "source": "/retail-media/docs/onsite-sponsored-products", "destination": "/retail-media/docs/line-items" },
     { "source": "/retail-media/docs/retailer-budgets", "destination": "/retail-media/docs/balances" },
-    { "source": "/retail-media/docs/retailer-billed", "destination": "/retail-media/docs/balances" }
+    { "source": "/retail-media/docs/retailer-billed", "destination": "/retail-media/docs/balances" },
+    { "source": "/retail-media/docs/budget-overrides", "destination": "/retail-media/docs/campaigns" }
   ]
 }

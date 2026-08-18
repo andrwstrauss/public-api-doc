@@ -56,6 +56,57 @@ A campaign draws budget from one or more [balances](/retail-media/docs/balances)
 
 ***
 
+## Budget Overrides
+
+<Card title="Budget Override Endpoints" icon="arrow-up-right-from-square" href="/retail-media/docs/campaigns-endpoints" horizontal />
+
+You can set a monthly or daily budget override at the campaign level to temporarily spend more or less than the campaign's current budget for the months or dates you specify. The override takes effect at midnight in your time zone on the first day of the month or date range you select. Budget overrides are also available at the [line item level](/retail-media/docs/line-items#budget-overrides).
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/campaigns/{campaignId}/campaign-budget-overrides` | Retrieves all existing budget overrides for a campaign. |
+| `PUT` | `/campaigns/{campaignId}/campaign-budget-overrides` | Replaces all existing campaign budget override settings. Use this endpoint to add, remove, or update overrides. |
+
+**Attributes**
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `monthlyBudgetOverrides` | `list<object>` | Monthly overrides, in chronological order. Each entry has `startMonth`, `duration`, `maxMonthlySpend`, `status`. |
+| `dailyBudgetOverrides` | `list<object>` | Daily overrides, in chronological order. Each entry has `startDate`, `duration`, `maxDailySpend`, `status`. |
+| `startMonth` | `string` | Start month (`YYYY-MM`). If `null`, defaults to the month following the last item in the override sequence. Writeable, nullable. |
+| `startDate` | `date` | Start date (`YYYY-MM-DD`). If `null`, defaults to the date following the last item in the override sequence. Writeable, nullable. |
+| `duration` | `string` | Length of the override: months for monthly overrides (`1M`, `2M`, ...) or days for daily overrides (`1D`, `2D`, ...). Writeable, not nullable. |
+| `maxMonthlySpend` / `maxDailySpend` | `decimal` | Spend cap for the override (`>= 0.0`). Writeable, not nullable. |
+| `status` | `enum` | Computed status: `Expired`, `Active`, `Upcoming`. Read-only. |
+
+<Warning>
+  Budget overrides cannot overlap. Scheduling a new override that overlaps the duration of an existing one returns a `400` validation error.
+</Warning>
+
+**Sample Request — Update Campaign Budget Override**
+
+```bash
+curl -L -X PUT 'https://api.criteo.com/{version}/retail-media/campaigns/446397494514737152/campaign-budget-overrides' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <MY_ACCESS_TOKEN>' \
+-d '{
+  "data": {
+    "type": "UpdateBudgetOverride",
+    "attributes": {
+      "dailyBudgetOverrides": [
+        { "duration": "15d", "maxDailySpend": "1", "startDate": "2024-01-01", "status": "Active" }
+      ],
+      "monthlyBudgetOverrides": [
+        { "duration": "1M", "maxMonthlySpend": "10", "startMonth": "2024-01", "status": "Active" }
+      ]
+    }
+  }
+}'
+```
+
+***
+
 <br />
 
 

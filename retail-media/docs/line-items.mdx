@@ -167,6 +167,61 @@ See the [Campaign Management Overview](/retail-media/docs/campaign-management-ov
 
 ***
 
+## Budget Overrides
+
+<Card title="Budget Override Endpoints" icon="arrow-up-right-from-square" href="/retail-media/docs/onsite-sponsored-products-line-items" horizontal />
+
+You can set a monthly or daily budget override at the line item level to temporarily spend more or less than the line item's current budget for the months or dates you specify. The override takes effect at midnight in your time zone on the first day of the month or date range you select. Budget overrides are also available at the [campaign level](/retail-media/docs/campaigns#budget-overrides).
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/line-items/{lineItemId}/line-item-budget-overrides` | Retrieves all existing budget overrides for a line item. |
+| `PUT` | `/line-items/{lineItemId}/line-item-budget-override` | Replaces all existing line item budget override settings. Use this endpoint to add, remove, or update overrides. |
+
+**Attributes**
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `monthlyLineItemBudgetOverrides` | `list<object>` | Monthly overrides, in chronological order. Each entry has `startMonth`, `duration`, `maxMonthlySpend`, `status`. |
+| `dailyLineItemBudgetOverrides` | `list<object>` | Daily overrides, in chronological order. Each entry has `startDate`, `duration`, `maxDailySpend`, `status`. |
+| `startMonth` | `string` | Start month (`YYYY-MM`). If `null`, defaults to the month following the last item in the override sequence. Writeable, nullable. |
+| `startDate` | `date` | Start date (`YYYY-MM-DD`). If `null`, defaults to the date following the last item in the override sequence. Writeable, nullable. |
+| `duration` | `string` | Length of the override: months for monthly overrides (`1M`, `2M`, ...) or days for daily overrides (`1D`, `2D`, ...). Writeable, not nullable. |
+| `maxMonthlySpend` / `maxDailySpend` | `decimal` | Spend cap for the override (`>= 0.0`). Writeable, not nullable. |
+| `status` | `enum` | Computed status: `Expired`, `Active`, `Upcoming`. Read-only. |
+
+<Warning>
+  Budget overrides cannot overlap. Scheduling a new override that overlaps the duration of an existing one returns a `400` validation error.
+
+  <Frame>
+  ![fdb6c02 image](/images/retail-media/docs/fdb6c02-image.png)
+  </Frame>
+</Warning>
+
+**Sample Request — Update Line Item Budget Override**
+
+```bash
+curl -L -X PUT 'https://api.criteo.com/{version}/retail-media/line-items/446397611671216128/line-item-budget-overrides' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <MY_ACCESS_TOKEN>' \
+-d '{
+  "data": {
+    "type": "<string>",
+    "attributes": {
+      "dailyLineItemBudgetOverrides": [
+        { "duration": "5D", "startDate": "2023-12-01", "maxDailySpend": "5", "status": "Upcoming" }
+      ],
+      "monthlyLineItemBudgetOverrides": [
+        { "duration": "3M", "maxMonthlySpend": "12", "startMonth": "2023-12", "status": "Upcoming" }
+      ]
+    }
+  }
+}'
+```
+
+***
+
 ## Getting started
 
 Once your campaign exists, create a line item within it, attach promoted products from your catalog, and activate the line item to begin serving.

@@ -30,7 +30,7 @@ flowchart LR
 
 * **Campaign ↔ Balance — many-to-many.** A balance funds multiple campaigns, and a campaign can draw against multiple balances.
 
-* **Campaign ↔ Retailer-billed Balance — many-to-many, scoped to one retailer.** Retailer-billed balances work the same way as self-funded balances, with one constraint: a retailer-billed balance only attaches to campaigns that share its `retailerId`. This doesn't limit how many campaigns it can fund — it bounds those campaigns to one retailer instead of leaving them open across an advertiser's full campaign roster. See [Balances](/retail-media/docs/balances#retailer-billed-balances) for the funding model, attributes, and endpoint changes.
+* **Campaign ↔ Retailer-billed Balance — many-to-many, scoped to one retailer.** A balance is either self-funded (the advertiser deposits the funds) or retailer-billed (the retailer funds it instead). Retailer-billed balances work the same way as self-funded ones for cardinality, with one constraint: a retailer-billed balance only attaches to campaigns that share its `retailerId`. This doesn't limit how many campaigns it can fund — it bounds those campaigns to one retailer instead of leaving them open across an advertiser's full campaign roster. Retailer-billed balances can't be created through the API — they're read-only, retrieved via `GET /balances` — and require API version `2026-01` or later to appear at all. See [Balances](/retail-media/docs/balances#retailer-billed-balances) for the full comparison table, attributes, and endpoint changes.
 
 * **Campaign → Line Item — one-to-many.** A campaign needs at least one line item to run ads.
 
