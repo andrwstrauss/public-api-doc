@@ -255,6 +255,7 @@
                             "group": "Line Items",
                             "root": "retail-media/docs/line-items",
                             "pages": [
+                              "retail-media/docs/line-items-endpoints",
                               "retail-media/docs/auction-line-items",
                               "retail-media/docs/promoted-products"
                             ]
@@ -516,6 +517,7 @@
                             "group": "Line Items",
                             "root": "retail-media/docs/line-items",
                             "pages": [
+                              "retail-media/docs/line-items-endpoints",
                               "retail-media/docs/auction-line-items",
                               "retail-media/docs/promoted-products"
                             ]
@@ -2665,7 +2667,6 @@
     { "source": "/retail-media/docs/campaign-structure", "destination": "/retail-media/docs/campaign-management-overview" },
     { "source": "/retail-media/docs/campaign-lineitem-status", "destination": "/retail-media/docs/campaigns#status" },
     { "source": "/retail-media/docs/campaigns-endpoints", "destination": "/retail-media/docs/campaigns" },
-    { "source": "/retail-media/docs/line-items-endpoints", "destination": "/retail-media/docs/line-items" },
     { "source": "/retail-media/docs/onsite-sponsored-products-line-items", "destination": "/retail-media/docs/auction-line-items" }
   ]
 }
