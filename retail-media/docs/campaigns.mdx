@@ -34,6 +34,17 @@ An Open Auction campaign operates on a first-price auction model using cost-per-
 
 ***
 
+## Status
+
+A campaign's status is `active` or `inactive` — it's read-only, derived automatically from its line items rather than set directly.
+
+* A campaign is `active` if **at least one** of its line items is `active`. Any other combination of line item statuses makes the campaign `inactive`.
+* Temporary budget caps (hourly, daily, or monthly) do **not** change a campaign to `inactive` — it stays `active` while a temporary cap is in effect. Only exhausting the campaign's total lifetime budget results in `inactive`.
+
+See [Line Items](/retail-media/docs/line-items#lifecycle) for the line item status values that drive this.
+
+***
+
 ## Quick Start
 
 1. **Select products** to promote from your account catalog.

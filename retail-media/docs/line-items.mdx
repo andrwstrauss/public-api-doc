@@ -146,6 +146,23 @@ When you submit a positive keyword, it enters a pending state. Criteo's validati
 * Campaigns are limited to 10,000 non-archived line items.
 * Line items are automatically archived 90 days after their end date.
 
+### Status
+
+| Status | Read-only? | Meaning |
+| --- | --- | --- |
+| `active` | No — writeable | Delivers ads. The only status you can set directly (along with `paused`). |
+| `paused` | No — writeable | Delivery stopped by request. |
+| `scheduled` | Yes | Flight dates haven't started yet. |
+| `ended` | Yes | Flight dates have passed. |
+| `budgetHit` | Yes | The line item's budget is exhausted. |
+| `noFunds` | Yes | No funds available from the drawable balance(s). |
+| `draft` | Yes | Missing attributes required for the line item to serve. |
+| `archived` | Yes | Automatically archived 90 days after the end date. |
+
+All statuses other than `active` and `paused` are applied automatically based on flight dates, financials, or missing required attributes — you can't set them directly. Every status except `active` makes the [campaign](/retail-media/docs/campaigns#status) `inactive`.
+
+Promoted product status (`active` / `paused`, via the pause and unpause endpoints on [Promoted Products](/retail-media/docs/promoted-products)) does not cascade — pausing products on a line item does not change the line item's or campaign's status.
+
 ***
 
 ## Relationships
@@ -163,7 +180,13 @@ See the [Campaign Management Overview](/retail-media/docs/campaign-management-ov
 
 * A line item can only target one retailer; advertising across retailers requires one line item per retailer.
 * Up to 500 promoted products per line item.
-* Preferred Deals are currently in beta and available only to Retailer partners. Contact your Criteo Account Manager for access.
+* Line items can and should feature multiple products — you don't need a separate line item per product.
+
+<Warning>
+  **Don't duplicate products across line items in the same campaign.** Line items with overlapping products under the same campaign scale much slower and can prevent you from meeting your spending goals.
+</Warning>
+
+* Preferred Deals are currently in beta and available only to Retailer partners. Contact your Criteo Account Manager for access. Where Onsite Sponsored Products line items have bid settings and optional budget/pacing controls, Preferred Deals line items require budget and pacing controls, with optional capping controls.
 
 ***
 

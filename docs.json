@@ -182,9 +182,7 @@
                       "retail-media/docs/api-pattern",
                       "retail-media/docs/api-response",
                       "retail-media/docs/bulk-calls",
-                      "retail-media/docs/rate-limits",
-                      "retail-media/docs/campaign-structure",
-                      "retail-media/docs/campaign-lineitem-status"
+                      "retail-media/docs/rate-limits"
                     ]
                   },
                   {
@@ -2677,6 +2675,8 @@
     { "source": "/retail-media/docs/onsite-sponsored-products", "destination": "/retail-media/docs/line-items" },
     { "source": "/retail-media/docs/retailer-budgets", "destination": "/retail-media/docs/balances" },
     { "source": "/retail-media/docs/retailer-billed", "destination": "/retail-media/docs/balances" },
-    { "source": "/retail-media/docs/budget-overrides", "destination": "/retail-media/docs/campaigns" }
+    { "source": "/retail-media/docs/budget-overrides", "destination": "/retail-media/docs/campaigns" },
+    { "source": "/retail-media/docs/campaign-structure", "destination": "/retail-media/docs/campaign-management-overview" },
+    { "source": "/retail-media/docs/campaign-lineitem-status", "destination": "/retail-media/docs/campaigns#status" }
   ]
 }

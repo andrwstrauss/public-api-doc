@@ -5,6 +5,8 @@ description: How Balances, Campaigns, Line Items, Catalogs, and Products fit tog
 
 This page maps how the core campaign management entities connect, before you drill into the API reference for any one of them. If you're building a new integration, start here to understand how a Balance funds a Campaign, how a Campaign breaks down into Line Items, and where your product Catalog and a Retailer's categories fit in.
 
+This page picks up one level below your [Account](/retail-media/docs/account) — the business and billing entity that contains everything described here. Account creation and management is handled separately; once you have one, this is what's inside it. Currently, the only campaign type supported through the API is Onsite Sponsored Products: an open auction, cost-per-click format.
+
 ## Entity relationships
 
 ```mermaid
@@ -40,11 +42,13 @@ flowchart LR
 
 * **Campaign / Line Item → Retailer, via Retailer Search and Category Search.** Before creating a campaign or line item, you pick a retailer, then narrow to categories within it. This is one workflow: find a retailer, then look up its categories.
 
+* **Campaign status ← Line Item status.** Campaign status isn't set directly — it's derived: a campaign is `active` if at least one of its line items is `active`, otherwise `inactive`. See [Campaigns](/retail-media/docs/campaigns#status) and [Line Items](/retail-media/docs/line-items#lifecycle) for the full status tables.
+
 ## Where to go next
 
 | Entity | Guide |
 | --- | --- |
-| Balances (self-funded and retailer-billed) | [Balances](/retail-media/docs/balances) |
+| Balances | [Balances](/retail-media/docs/balances) |
 | Catalog | [Catalogs](/retail-media/docs/catalogs) |
 | Campaigns | [Campaigns](/retail-media/docs/campaigns) |
 | Line Items and Promoted Products | [Line Items](/retail-media/docs/line-items) |
