@@ -7,6 +7,49 @@ This page maps how the core campaign management entities connect, before you dri
 
 This page picks up one level below your [Account](/retail-media/docs/account) — the business and billing entity that contains everything described here. Account creation and management is handled separately; once you have one, this is what's inside it. Currently, the only campaign type supported through the API is Onsite Sponsored Products: an open auction, cost-per-click format.
 
+## Core objects
+
+### Balance
+
+Funds one or more campaigns and acts as their spend cap — when linked campaigns exhaust it, they stop running, even before their scheduled end date.
+
+* `status` — `active`, `scheduled`, or `ended`.
+* `deposited`, `spent`, `remaining` — the funding amount and how much of it is left.
+* `balanceType` — `capped` or `uncapped`.
+* `retailerId` — set only on retailer-billed balances; `null` on self-funded ones.
+
+### Campaign
+
+Represents a marketing objective. The budget and attribution container that groups line items — doesn't bid or deliver on its own.
+
+* `name`, `startDate` / `endDate` — identity and flight window.
+* `status` — `active` or `inactive`; derived from line item status, not set directly.
+* `budget`, `budgetSpent`, `budgetRemaining` — optional campaign-level spend cap, alongside balance-level and line-item-level budget controls.
+* `drawableBalanceIds` — which balance(s) the campaign can spend from.
+* `clickAttributionWindow` / `viewAttributionWindow` — how conversions get credited back to an ad.
+* `monthlyPacing` / `dailyPacing` — optional pacing controls.
+* `retailerId` — required and validated against the balance's `retailerId` for retailer-billed campaigns.
+
+### Line Item
+
+The unit that actually bids and delivers. Defines targeting, budget, and schedule for promoted products against a single retailer.
+
+* `name`, `targetRetailerId` — identity and the one retailer this line item runs against.
+* `status` — an 8-value lifecycle (`active`, `paused`, `scheduled`, `ended`, `budgetHit`, `noFunds`, `draft`, `archived`); only `active`/`paused` are writeable.
+* `budget`, `budgetSpent`, `budgetRemaining` — optional line-item-level spend cap.
+* `bidStrategy`, `targetBid`, `maxBid` — how the line item bids in the auction.
+* `optimizationStrategy` — what the automated bid strategy optimizes toward (e.g. conversion, revenue, clicks).
+* `flightSchedule` — optional day-of-week/leg-based delivery windows, on top of `startDate` / `endDate`.
+
+### Promoted Product
+
+Attaches one catalog product to a line item for delivery, with an optional per-product bid override.
+
+* `id` — the catalog product ID this promoted product points at.
+* `lineItemId` — the line item it's attached to.
+* `bidOverride` — overrides the line item's `targetBid` for this product specifically; must clear the catalog's `minBid`.
+* `status` — writeable as `active`/`paused` via the pause/unpause endpoints; more granular values are read-only and mirror line item status.
+
 ## Entity relationships
 
 ```mermaid
