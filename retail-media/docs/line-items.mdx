@@ -10,7 +10,7 @@ original_file: to-migrate/criteo-dev-portal-full-export/merged_export/Retail_Med
 
 ## What it is
 
-Each campaign consists of one or more line items — a campaign needs at least one line item to run ads. A line item selects the products to advertise, sourced from your account [catalog](/retail-media/docs/catalogs), and the single retailer where those products will run. To advertise across multiple retailers, create a separate line item per retailer.
+Each campaign consists of one or more line items — a campaign needs at least one line item to run ads. A line item holds the [promoted products](/retail-media/docs/promoted-products) to advertise — each one referencing an entry in your account [catalog](/retail-media/docs/catalogs) — and runs against a single retailer. To advertise across multiple retailers, create a separate line item per retailer.
 
 Currently, the only line item type supported through the API is **Onsite Sponsored Products** — an open auction, cost-per-click (CPC) format where advertisers bid for placement against other advertisers targeting the same inventory.
 
@@ -168,8 +168,8 @@ Promoted product status (`active` / `paused`, via the pause and unpause endpoint
 ## Relationships
 
 * **Campaign → Line Item** — one-to-many. A campaign needs at least one line item to run.
-* **Line Item → Catalog** — a line item selects products from the advertiser's [catalog](/retail-media/docs/catalogs); what's synced there determines what a line item can promote.
-* **Line Item → Promoted Products** — one-to-many. [Promoted Products](/retail-media/docs/promoted-products) are the actual products attached to a line item, sourced from the catalog.
+* **Line Item → Promoted Products** — one-to-many. [Promoted Products](/retail-media/docs/promoted-products) are the actual products attached to a line item.
+* **Promoted Products → Catalog** — each promoted product references an entry in the advertiser's [catalog](/retail-media/docs/catalogs); what's synced there determines what's available to promote. The catalog reference lives on the product, not the line item.
 * **Line Item → Retailer** — a line item runs against a single retailer, chosen via [Retailer Search](/retail-media/docs/retailer-search) and narrowed with [Category Search](/retail-media/docs/category-search).
 
 See the [Campaign Management Overview](/retail-media/docs/campaign-management-overview) for how Line Items fit with the rest of the campaign hierarchy.

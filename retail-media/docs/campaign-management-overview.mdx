@@ -22,8 +22,8 @@ flowchart LR
     Balance <-->|many-to-many| Campaign
     RBBalance <-->|"many-to-many,<br/>same retailer"| Campaign
     Campaign -->|"one-to-many<br/>(1+ required)"| LineItem
-    LineItem -->|selects from| Catalog
     LineItem -->|one-to-many| Products
+    Products -->|references| Catalog
     Campaign -.->|scoped to| Retailer
     LineItem -.->|scoped to| Retailer
 ```
@@ -36,9 +36,9 @@ flowchart LR
 
 * **Campaign → Line Item — one-to-many.** A campaign needs at least one line item to run ads.
 
-* **Line Item → Catalog.** A line item selects products from the advertiser's catalog. What's synced in the catalog determines what a line item can promote.
+* **Line Item → Products — one-to-many.** A line item needs at least one promoted product. Promoted Products are the actual products attached to a line item — a child of Line Items in the diagram, not a peer entity.
 
-* **Line Item → Products — one-to-many.** Promoted Products are the actual products attached to a line item, sourced from the catalog above — a child of Line Items, not a peer entity.
+* **Products → Catalog.** A promoted product references an entry in the advertiser's catalog — it's the product, not the line item, that points at the catalog. What's synced in the catalog determines what's available to promote.
 
 * **Campaign / Line Item → Retailer, via Retailer Search and Category Search.** Before creating a campaign or line item, you pick a retailer, then narrow to categories within it. This is one workflow: find a retailer, then look up its categories.
 
