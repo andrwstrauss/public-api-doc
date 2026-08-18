@@ -219,6 +219,13 @@
                         ]
                       },
                       {
+                        "group": "Balances",
+                        "root": "retail-media/docs/balances",
+                        "pages": [
+                          "retail-media/docs/balances-endpoints"
+                        ]
+                      },
+                      {
                         "group": "Billing",
                         "root": "retail-media/docs/billing",
                         "pages": [
@@ -478,6 +485,13 @@
                           "retail-media/docs/audience-endpoints",
                           "retail-media/docs/audience-segment-endpoints",
                           "retail-media/docs/algebra-nodes"
+                        ]
+                      },
+                      {
+                        "group": "Balances",
+                        "root": "retail-media/docs/balances",
+                        "pages": [
+                          "retail-media/docs/balances-endpoints"
                         ]
                       },
                       {
