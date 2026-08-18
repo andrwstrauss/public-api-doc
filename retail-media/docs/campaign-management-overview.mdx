@@ -1,0 +1,51 @@
+---
+title: Campaign Management Overview
+description: How Balances, Campaigns, Line Items, Catalogs, and Products fit together before you build against any one of them.
+---
+
+This page maps how the core campaign management entities connect, before you drill into the API reference for any one of them. If you're building a new integration, start here to understand how a Balance funds a Campaign, how a Campaign breaks down into Line Items, and where your product Catalog and a Retailer's categories fit in.
+
+## Entity relationships
+
+```mermaid
+flowchart LR
+    Retailer["Retailer<br/>via Retailer Search and Category Search"]
+    Balance["Balance<br/>self-funded"]
+    RBBalance["Retailer-billed Balance<br/>scoped to one retailer"]
+    Campaign["Campaign"]
+    LineItem["Line Item"]
+    Catalog["Catalog"]
+    Products["Promoted Products"]
+
+    Balance <-->|many-to-many| Campaign
+    RBBalance <-->|"many-to-many,<br/>same retailer"| Campaign
+    Campaign -->|"one-to-many<br/>(1+ required)"| LineItem
+    LineItem -->|selects from| Catalog
+    LineItem -->|one-to-many| Products
+    Campaign -.->|scoped to| Retailer
+    LineItem -.->|scoped to| Retailer
+```
+
+## How the entities connect
+
+* **Campaign ↔ Balance — many-to-many.** A balance funds multiple campaigns, and a campaign can draw against multiple balances.
+
+* **Campaign ↔ Retailer-billed Balance — many-to-many, scoped to one retailer.** Retailer-billed balances work the same way as self-funded balances, with one constraint: a retailer-billed balance only attaches to campaigns that share its `retailerId`. This doesn't limit how many campaigns it can fund — it bounds those campaigns to one retailer instead of leaving them open across an advertiser's full campaign roster. See [Balances](/retail-media/docs/balances#retailer-billed-balances) for the funding model, attributes, and endpoint changes.
+
+* **Campaign → Line Item — one-to-many.** A campaign needs at least one line item to run ads.
+
+* **Line Item → Catalog.** A line item selects products from the advertiser's catalog. What's synced in the catalog determines what a line item can promote.
+
+* **Line Item → Products — one-to-many.** Promoted Products are the actual products attached to a line item, sourced from the catalog above — a child of Line Items, not a peer entity.
+
+* **Campaign / Line Item → Retailer, via Retailer Search and Category Search.** Before creating a campaign or line item, you pick a retailer, then narrow to categories within it. This is one workflow: find a retailer, then look up its categories.
+
+## Where to go next
+
+| Entity | Guide |
+| --- | --- |
+| Balances (self-funded and retailer-billed) | [Balances](/retail-media/docs/balances) |
+| Catalog | [Catalogs](/retail-media/docs/catalogs) |
+| Campaigns | [Campaigns](/retail-media/docs/campaigns) |
+| Line Items and Promoted Products | [Line Items](/retail-media/docs/line-items) |
+| Retailer and category lookup | [Retailer Search](/retail-media/docs/retailer-search), [Category Search](/retail-media/docs/category-search) |

@@ -206,8 +206,7 @@
                           "retail-media/docs/account-creation-and-management-private-market",
                           "retail-media/docs/account-fees",
                           "retail-media/docs/brands",
-                          "retail-media/docs/sellers",
-                          "retail-media/docs/retailer-search"
+                          "retail-media/docs/sellers"
                         ]
                       },
                       {
@@ -220,13 +219,6 @@
                         ]
                       },
                       {
-                        "group": "Balances",
-                        "root": "retail-media/docs/balances",
-                        "pages": [
-                          "retail-media/docs/balances-endpoints"
-                        ]
-                      },
-                      {
                         "group": "Billing",
                         "root": "retail-media/docs/billing",
                         "pages": [
@@ -235,44 +227,61 @@
                         ]
                       },
                       {
-                        "group": "Campaigns",
-                        "root": "retail-media/docs/campaign",
+                        "group": "Campaign Management",
                         "pages": [
-                          "retail-media/docs/campaigns-endpoints"
-                        ]
-                      },
-                      {
-                        "group": "Catalog",
-                        "root": "retail-media/docs/catalogs",
-                        "pages": [
-                          "retail-media/docs/catalog-endpoints",
-                          "retail-media/docs/store-inventory"
-                        ]
-                      },
-                      {
-                        "group": "Line Items",
-                        "root": "retail-media/docs/line-items",
-                        "pages": [
-                          "retail-media/docs/line-items-endpoints",
+                          "retail-media/docs/campaign-management-overview",
                           {
-                            "group": "Onsite Sponsored Products",
-                            "root": "retail-media/docs/onsite-sponsored-products",
+                            "group": "Balances",
+                            "root": "retail-media/docs/balances",
                             "pages": [
+                              "retail-media/docs/balances-endpoints"
+                            ]
+                          },
+                          {
+                            "group": "Catalogs",
+                            "root": "retail-media/docs/catalogs",
+                            "pages": [
+                              "retail-media/docs/catalog-endpoints",
+                              "retail-media/docs/store-inventory"
+                            ]
+                          },
+                          {
+                            "group": "Campaigns",
+                            "root": "retail-media/docs/campaigns",
+                            "pages": [
+                              "retail-media/docs/campaigns-endpoints"
+                            ]
+                          },
+                          {
+                            "group": "Line Items",
+                            "root": "retail-media/docs/line-items",
+                            "pages": [
+                              "retail-media/docs/line-items-endpoints",
                               "retail-media/docs/onsite-sponsored-products-line-items",
+                              "retail-media/docs/promoted-products"
+                            ]
+                          },
+                          {
+                            "group": "Retailer & Category Lookup",
+                            "pages": [
+                              "retail-media/docs/retailer-search",
+                              "retail-media/docs/category-search"
+                            ]
+                          },
+                          {
+                            "group": "Targeting & Bidding",
+                            "pages": [
                               "retail-media/docs/keywords",
                               "retail-media/docs/keyword-review",
                               "retail-media/docs/bid-multipliers",
-                              "retail-media/docs/budget-overrides",
-                              "retail-media/docs/minimum-bid"
+                              "retail-media/docs/minimum-bid",
+                              "retail-media/docs/recommended-categories",
+                              "retail-media/docs/recommended-keywords"
                             ]
                           },
-                          "retail-media/docs/promoted-products",
-                          "retail-media/docs/recommended-categories",
-                          "retail-media/docs/recommended-keywords",
-                          "retail-media/docs/category-search"
+                          "retail-media/docs/budget-overrides"
                         ]
                       },
-                      "retail-media/docs/retailer-budgets",
                       {
                         "group": "Demand Side Analytics (DSP)",
                         "root": "retail-media/docs/analytics",
@@ -459,8 +468,7 @@
                           "retail-media/docs/account-creation-and-management-private-market",
                           "retail-media/docs/account-fees",
                           "retail-media/docs/brands",
-                          "retail-media/docs/sellers",
-                          "retail-media/docs/retailer-search"
+                          "retail-media/docs/sellers"
                         ]
                       },
                       {
@@ -473,13 +481,6 @@
                         ]
                       },
                       {
-                        "group": "Balances",
-                        "root": "retail-media/docs/balances",
-                        "pages": [
-                          "retail-media/docs/balances-endpoints"
-                        ]
-                      },
-                      {
                         "group": "Billing",
                         "root": "retail-media/docs/billing",
                         "pages": [
@@ -488,44 +489,61 @@
                         ]
                       },
                       {
-                        "group": "Campaigns",
-                        "root": "retail-media/docs/campaign",
+                        "group": "Campaign Management",
                         "pages": [
-                          "retail-media/docs/campaigns-endpoints"
-                        ]
-                      },
-                      {
-                        "group": "Catalog",
-                        "root": "retail-media/docs/catalogs",
-                        "pages": [
-                          "retail-media/docs/catalog-endpoints",
-                          "retail-media/docs/store-inventory"
-                        ]
-                      },
-                      {
-                        "group": "Line Items",
-                        "root": "retail-media/docs/line-items",
-                        "pages": [
-                          "retail-media/docs/line-items-endpoints",
+                          "retail-media/docs/campaign-management-overview",
                           {
-                            "group": "Onsite Sponsored Products",
-                            "root": "retail-media/docs/onsite-sponsored-products",
+                            "group": "Balances",
+                            "root": "retail-media/docs/balances",
                             "pages": [
+                              "retail-media/docs/balances-endpoints"
+                            ]
+                          },
+                          {
+                            "group": "Catalogs",
+                            "root": "retail-media/docs/catalogs",
+                            "pages": [
+                              "retail-media/docs/catalog-endpoints",
+                              "retail-media/docs/store-inventory"
+                            ]
+                          },
+                          {
+                            "group": "Campaigns",
+                            "root": "retail-media/docs/campaigns",
+                            "pages": [
+                              "retail-media/docs/campaigns-endpoints"
+                            ]
+                          },
+                          {
+                            "group": "Line Items",
+                            "root": "retail-media/docs/line-items",
+                            "pages": [
+                              "retail-media/docs/line-items-endpoints",
                               "retail-media/docs/onsite-sponsored-products-line-items",
+                              "retail-media/docs/promoted-products"
+                            ]
+                          },
+                          {
+                            "group": "Retailer & Category Lookup",
+                            "pages": [
+                              "retail-media/docs/retailer-search",
+                              "retail-media/docs/category-search"
+                            ]
+                          },
+                          {
+                            "group": "Targeting & Bidding",
+                            "pages": [
                               "retail-media/docs/keywords",
                               "retail-media/docs/keyword-review",
                               "retail-media/docs/bid-multipliers",
-                              "retail-media/docs/budget-overrides",
-                              "retail-media/docs/minimum-bid"
+                              "retail-media/docs/minimum-bid",
+                              "retail-media/docs/recommended-categories",
+                              "retail-media/docs/recommended-keywords"
                             ]
                           },
-                          "retail-media/docs/promoted-products",
-                          "retail-media/docs/recommended-categories",
-                          "retail-media/docs/recommended-keywords",
-                          "retail-media/docs/category-search"
+                          "retail-media/docs/budget-overrides"
                         ]
                       },
-                      "retail-media/docs/retailer-budgets",
                       {
                         "group": "Demand Side Analytics (DSP)",
                         "root": "retail-media/docs/analytics",
@@ -2642,6 +2660,10 @@
     { "source": "/marketing-solutions/v2025.04", "destination": "/marketing-solutions/v2025.04/docs/welcome-to-criteo" },
     { "source": "/marketing-solutions/v2025.01", "destination": "/marketing-solutions/v2025.01/docs/welcome-to-criteo" },
     { "source": "/retailer-integration", "destination": "/retailer-integration/docs/overview" },
-    { "source": "/retailer-integration/v2026.01", "destination": "/retailer-integration/docs/overview" }
+    { "source": "/retailer-integration/v2026.01", "destination": "/retailer-integration/docs/overview" },
+    { "source": "/retail-media/docs/campaign", "destination": "/retail-media/docs/campaigns" },
+    { "source": "/retail-media/docs/onsite-sponsored-products", "destination": "/retail-media/docs/line-items" },
+    { "source": "/retail-media/docs/retailer-budgets", "destination": "/retail-media/docs/balances" },
+    { "source": "/retail-media/docs/retailer-billed", "destination": "/retail-media/docs/balances" }
   ]
 }

@@ -19,9 +19,9 @@ import { EndpointBadge } from "/snippets/EndpointBadge.jsx";
   **Backward compatibility for balance endpoints:**
 
   * The `poNumber` field on balance responses is **removed** in `2026-01` and replaced by two separate fields: `retailerPoNumber` and `criteoPoNumber`. This is a breaking change for consumers of `GET /balances` on prior versions who rely on `poNumber`.
-  * All other new fields (`retailerId`, `privateMarketBillingType`) are additive. Retailer budgets are hidden by default on prior API versions.
+  * All other new fields (`retailerId`, `privateMarketBillingType`) are additive. Retailer-billed balances are hidden by default on prior API versions.
 
-  You can learn more about retailer budgets [on this page](/retail-media/docs/retailer-budgets).
+  You can learn more about retailer-billed balances [on this page](/retail-media/docs/balances#retailer-billed-balances).
 </Warning>
 
 ***
@@ -1177,8 +1177,8 @@ https://api.criteo.com/{version}/retail-media/accounts/{accountId}/balances
 </EndpointBadge>
 
 <Warning>
-  On API version `2026-07` and later, retailer budgets are included and `retailerId`, `retailerPoNumber`, and `criteoPoNumber` are returned. The old `poNumber` field is removed.  
-  Learn more on retailer budgets [here](/retail-media/docs/retailer-billed).
+  On API version `2026-07` and later, retailer-billed balances are included and `retailerId`, `retailerPoNumber`, and `criteoPoNumber` are returned. The old `poNumber` field is removed.  
+  Learn more about retailer-billed balances [here](/retail-media/docs/balances#retailer-billed-balances).
 
   **Legacy version behavior (`2026-01` and earlier):** Only standard Criteo budget balances are returned. `retailerId`, `retailerPoNumber`, and `criteoPoNumber` are not present in the response. The legacy `poNumber` field is present.
 </Warning>
@@ -2047,7 +2047,7 @@ https://api.criteo.com/{version}/retail-media/balances/{balanceId}/campaigns
    </td>
    <td>
     <p>
-     <a href="/retail-media/docs/campaign">
+     <a href="/retail-media/docs/campaigns">
       Campaign
      </a>
      ID, respective to the campaign(s) currently appended to the balance
@@ -2225,7 +2225,7 @@ https://api.criteo.com/{version}/retail-media/balances/{balanceId}/campaigns/app
    </td>
    <td>
     <p>
-     <a href="/retail-media/docs/campaign">
+     <a href="/retail-media/docs/campaigns">
       Campaign
      </a>
      ID, required to define to which campaign(s) the balance should be appended or deleted
@@ -2331,7 +2331,7 @@ https://api.criteo.com/{version}/retail-media/balances/{balanceId}/campaigns/del
    </td>
    <td>
     <p>
-     <a href="/retail-media/docs/campaign">
+     <a href="/retail-media/docs/campaigns">
       Campaign
      </a>
      ID, required to define to which campaign(s) the balance should be appended or deleted

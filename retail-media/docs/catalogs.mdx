@@ -1,9 +1,9 @@
 ---
-title: Catalog
+title: Catalogs
 original_file: to-migrate/criteo-dev-portal-full-export/merged_export/Retail_Media/v2026_01/docs/Guides for Retail Media API/catalogs/index.md
 ---
 
-
+<Card title="Catalog Endpoints" icon="arrow-up-right-from-square" href="/retail-media/docs/catalog-endpoints" horizontal />
 
 A catalog is a snapshot of all catalog products from the brands and retailers associated with an account, typically updated once a day. Each account has a single catalog listing all the products that the account is eligible to promote.
 
@@ -22,6 +22,12 @@ A catalog is a snapshot of all catalog products from the brands and retailers as
 
   * Catalogs are returned as a [newline-delimited JSON byte stream](https://en.wikipedia.org/wiki/JSON_streaming)
 </Info>
+
+***
+
+## Relationships
+
+A [line item](/retail-media/docs/line-items) selects the products it promotes from the account's catalog — what's synced here determines what a line item can advertise. See the [Campaign Management Overview](/retail-media/docs/campaign-management-overview) for how the catalog fits into the wider entity model.
 
 ***
 

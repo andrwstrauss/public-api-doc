@@ -3,87 +3,179 @@ title: Line Items
 original_file: to-migrate/criteo-dev-portal-full-export/merged_export/Retail_Media/v2026_01/docs/Guides for Retail Media API/line-items/index.md
 ---
 
+<CardGroup cols={2}>
+  <Card title="Line Items Endpoints" icon="arrow-up-right-from-square" href="/retail-media/docs/line-items-endpoints" horizontal />
+  <Card title="Onsite Sponsored Products Line Items" icon="arrow-up-right-from-square" href="/retail-media/docs/onsite-sponsored-products-line-items" horizontal />
+</CardGroup>
 
+## What it is
 
-## Overview
+Each campaign consists of one or more line items — a campaign needs at least one line item to run ads. A line item selects the products to advertise, sourced from your account [catalog](/retail-media/docs/catalogs), and the single retailer where those products will run. To advertise across multiple retailers, create a separate line item per retailer.
 
-Each campaign consists of one or more line items. You can only run ads after creating a campaign and at least one line item.
-
-A line item allows you to select the products and the retailer where you'd like to advertise. Each line item can include multiple featured products but is restricted to a single retailer. To advertise across multiple retailers, you must create separate line items for each.
-
-Several settings are available to help you manage your budget and optimize ad delivery effectively.
-
-With the Criteo API, you can:
-
-* Manage your retail media line items
-
-* Configure line items, including budgets, flight dates, bids (for Onsite Sponsored Products), and targeting options (for Preferred Deals)
-
-* Retrieve products from your product catalog to advertise
-
-### Line Item Settings
+Currently, the only line item type supported through the API is **Onsite Sponsored Products** — an open auction, cost-per-click (CPC) format where advertisers bid for placement against other advertisers targeting the same inventory.
 
 <Frame>
 ![789d2f5 l3 line items](/images/retail-media/docs/789d2f5-l3-line-items.png)
 </Frame>
 
-* A line item promotes products for ads on a specific retailer.
+***
 
-* Line items include settings such as start and end dates, optional budget controls, and associated retailers where ads are served.
+## Key attributes
 
-* Campaigns can manage budgets at both the line item and campaign level.
-
-* Several [reports](/retail-media/docs/demand-side-analytics-get-started) are available to measure line item performance.
-
-* Campaigns are limited to 10,000 non-archived line items.
-
-* Line items are automatically archived 90 days after their end date.
-
-### Promoted Products
+* **Start and end dates** — the flight window during which a line item can serve.
+* **Budget controls** — optional budget, pacing, and bid settings at the line item level, in addition to controls at the campaign level.
+* **Bid settings** — `bidStrategy`, `optimizationStrategy`, and `keywordStrategy` govern how a line item competes in the auction.
+* **Promoted products** — the products attached to a line item, up to 500 per line item.
 
 <Frame>
 ![57f7b20 l4 products](/images/retail-media/docs/57f7b20-l4-products.png)
 </Frame>
 
-* A promoted product defines the product to be advertised on a line item.
+***
 
-* Use your account [catalog](/retail-media/docs/catalogs) to identify eligible products for promotion.
+## Keyword targeting
 
-* Each product can have a specific bid amount if desired.
+Onsite Sponsored Products line items target search placements using keywords. You can specify which keywords to target positively, which to avoid, and set bids on the most relevant ones.
 
-* Line items can include up to 500 promoted products.
+### Negative keyword targeting
+
+<Info>
+  Negative keyword targeting applies **only** to Onsite Sponsored Products campaigns and line items. It lets you specify keywords on which your ads should not appear.
+</Info>
+
+Negative keywords can be specified as either **Broad Match** or **Exact Match**.
+
+<table>
+ <thead>
+  <tr>
+   <th><p>Match Type</p></th>
+   <th><p>Negative keyword</p></th>
+   <th><p>Ads won't show for</p></th>
+   <th><p>Ads may show for</p></th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><p>Broad match</p></td>
+   <td><p>Men's shoes</p></td>
+   <td><p>Men shoes, Blue men's shoes, Men's shoe size 9</p></td>
+   <td><p>Shoes, Boy's shoes, Men's basketball shoes</p></td>
+  </tr>
+  <tr>
+   <td><p>Exact match</p></td>
+   <td><p>Men's shoes</p></td>
+   <td><p>Men's shoes, Mens shoes, Mens shoe</p></td>
+   <td><p>Shoes, Blue men's shoes, Mens shoe size 9</p></td>
+  </tr>
+ </tbody>
+</table>
+
+<Frame caption="**Exact match** blocks ads from serving for specific keywords, while broad match blocks ads for a range of similar terms. **Broad match** is considered a subset of exact match, meaning keywords set as broad will be treated as both broad and exact matches.">
+  <img src="/images/retail-media/docs/39b3f99-negativekeyword2.png" alt="**Exact match** blocks ads from serving for specific keywords, while broad match blocks ads for a range of similar terms. **Broad match** is considered a subset of exact match, meaning keywords set as broad will be treated as both broad and exact matches." />
+</Frame>
+
+### Submitted keywords
+
+Submitted (or Positive) keyword targeting enables targeting based on a pool of search phrases that closely match what shoppers type. The API allows you to specify these phrases using the `PositiveExactMatch` match type, comparing the shopper's search term with your specified keywords for an exact match.
+
+[Submitted Keywords](https://help.retailmedia.criteo.com/kb/guide/en/submitted-keywords-pWrW3V33fn/Steps/1632115) will always be **Exact Match**.
+
+<table>
+ <thead>
+  <tr>
+   <th><p>Submitted keyword match type</p></th>
+   <th><p>Positive keyword</p></th>
+   <th><p>Ads will show for</p></th>
+   <th><p>Ads won't show for</p></th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><p>Exact match</p></td>
+   <td><p>Women's shoes</p></td>
+   <td><p>Women's shoes, Womens shoes, Womens shoe</p></td>
+   <td><p>Shoes, Blue women's shoes, Womens shoe size 9</p></td>
+  </tr>
+ </tbody>
+</table>
+
+**Keyword normalization involves:**
+
+* Removing stop words (e.g., "a," "the," "at").
+* [Stemming](https://help.retailmedia.criteo.com/kb/guide/en/keyword-bidding-oBNia2gtXt/Steps/2150023,2150048,2150049) remaining words by trimming prefixes and suffixes ("runner" => "run").
+* Sorting remaining words alphabetically.
+
+You can also prune phrases using `NegativeExactMatch` and `NegativeBroadMatch` to remove unwanted matches.
+
+* **Negative exact match**: Removes phrases that match the normalized keyword exactly.
+* **Negative broad match**: Removes phrases that match any part of a normalized keyword.
+
+The remaining positive phrases are sent to delivery for bid qualification on search pages; delivery does not use negative keywords.
+
+<Frame>
+  <img src="/images/retail-media/docs/824f121-KWS.png" alt="KWS.png" />
+</Frame>
+
+#### Submitted keyword approval workflow
+
+When you submit a positive keyword, it enters a pending state. Criteo's validation system automatically reviews and approves or rejects the keyword:
+
+* If the keyword is already mapped in the automated keyword model, it is approved.
+* If the keyword contains a competitor's brand name, it is rejected and deactivated.
+* If the keyword cannot be validated automatically, a Criteo reviewer manually assesses its eligibility.
+
+### Keyword bidding
+
+* Keyword bidding offers more granular control over your ad spend by allowing specific bids on keywords.
+* The bid must respect the [minimum bid](/retail-media/docs/minimum-bid) of the line item.
+
+<Info>
+  If the line item has a maximum CPC bid set, this will always be enforced, even if a keyword bid exceeds it.
+</Info>
+
+**Outcomes based on keyword status:**
+
+* **Approved:** Keyword bids take effect immediately.
+* **In Review:** Bids are not effective until the keyword is approved.
+* **Rejected:** Bids have no effect.
+
+***
+
+## Lifecycle
+
+* Campaigns are limited to 10,000 non-archived line items.
+* Line items are automatically archived 90 days after their end date.
+
+***
+
+## Relationships
+
+* **Campaign → Line Item** — one-to-many. A campaign needs at least one line item to run.
+* **Line Item → Catalog** — a line item selects products from the advertiser's [catalog](/retail-media/docs/catalogs); what's synced there determines what a line item can promote.
+* **Line Item → Promoted Products** — one-to-many. [Promoted Products](/retail-media/docs/promoted-products) are the actual products attached to a line item, sourced from the catalog.
+* **Line Item → Retailer** — a line item runs against a single retailer, chosen via [Retailer Search](/retail-media/docs/retailer-search) and narrowed with [Category Search](/retail-media/docs/category-search).
+
+See the [Campaign Management Overview](/retail-media/docs/campaign-management-overview) for how Line Items fit with the rest of the campaign hierarchy.
+
+***
+
+## Constraints and gotchas
+
+* A line item can only target one retailer; advertising across retailers requires one line item per retailer.
+* Up to 500 promoted products per line item.
+* Preferred Deals are currently in beta and available only to Retailer partners. Contact your Criteo Account Manager for access.
 
 ***
 
 ## Getting started
 
-1. **Select products** from your account catalog to promote.
-
-2. **Create a campaign** to define the marketing objective.
-
-3. **Create a line item** within the campaign.
-
-4. **Add products** to the line item to specify which products to promote.
-
-5. **Assign the campaign** to an account balance for budget management.
-
-6. **Activate your line item** to begin running ads!
-
-<Warning>
-  **Access to Preferred Deals capabilities**
-
-  Preferred Deals are currently in beta and available only to our Retailer partners. To access Preferred Deals documentation, please contact your Criteo Account Manager.
-</Warning>
+Once your campaign exists, create a line item within it, attach promoted products from your catalog, and activate the line item to begin serving.
 
 ***
-
-<br />
-
 
 ## What's next
 
 * [Line Items Endpoints](/retail-media/docs/line-items-endpoints)
+* [Onsite Sponsored Products Line Items](/retail-media/docs/onsite-sponsored-products-line-items)
 * [Promoted Products](/retail-media/docs/promoted-products)
-* [Recommended Keywords](/retail-media/docs/recommended-keywords)
-* [Recommended Categories](/retail-media/docs/recommended-categories)
-* [Category Search](/retail-media/docs/categories)
+* Next: [Targeting & Bidding — Keywords](/retail-media/docs/keywords)
