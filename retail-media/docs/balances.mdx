@@ -3,46 +3,57 @@ title: Balances
 original_file: to-migrate/criteo-dev-portal-full-export/merged_export/Retail_Media/v2026_01/docs/Guides for Retail Media API/balances/index.md
 ---
 
+A balance holds the funds an account can spend on campaigns. It caps spend across every campaign linked to it: when their combined cost reaches the balance amount, all linked campaigns stop, even before their end dates. A campaign needs at least one balance to run.
 
+## Balance types
 
-<Info>
-  A balance represents the funds an account can allocate toward campaigns, acting as a spend cap across all campaigns linked to it. When the combined costs of all linked campaigns reach the balance amount, all associated campaigns will stop running, even if this occurs before their scheduled end date.
-</Info>
+| Type | Funded by | Scope | `retailerId` |
+| --- | --- | --- | --- |
+| **Criteo balance** | The advertiser | Not scoped to a retailer; linked campaigns can serve on any retailer available to the account | `null` |
+| **Retailer-budgets balance** | The retailer | Scoped to the retailer in `retailerId`; linked campaigns must be retailer-native | Set |
 
-***
+Retailer-budgets balances support the Commerce Max Retailer Budgets buying model, where the retailer funds campaign budgets instead of the advertiser. They're returned on API version `2026-01` and later and hidden by default on earlier versions.
 
-## About Balances
+### Retailer-budgets balance rules
 
-* Campaigns must be assigned to **at least one balance** to run.
+The `retailerId` must be consistent across balance → campaign → line item:
 
-* Balances provide an **additional budget management tool** alongside controls at the campaign or line item level.
+- Campaigns drawing on a retailer-budgets balance must be created with the balance's `retailerId`. A mismatch returns `RetailerMismatchWithBalance`.
+- Line items in those campaigns must set `targetRetailerId` to the campaign's `retailerId`. A mismatch returns `RetailerMismatchWithCampaign`.
+- Campaigns can't be removed from a retailer-budgets balance. Trying returns `RetailerBilledBalanceImmutable`.
+- Retailer-budgets balances can't be created through the API; retrieve them with `GET /accounts/{accountId}/balances`.
 
-* In Demand accounts balances are `read-only` through the API; only Admins or Business Managers can create or modify them via the Billing portal. However, in Supply accounts or Private Market accounts balances can be created or modified via the API as long as the user has the proper permissions.
+To check which budget models a retailer supports before creating a campaign, read `budgetModel` (`capped`, `uncapped`, `retailerBudgets`, or `criteoBudgets`) from [Retailer Search](/retail-media/docs/retailer-search).
 
-***
+## What each account type can do
 
-## Balance Statuses
+Buyers (demand accounts) can read balances and link campaigns to them. Retailers (supply and Private Market accounts) can also create and fund balances.
 
-Balances can have one of the following statuses, which determine whether a balance is currently funding campaigns:
+| Action | Endpoint | Buyers | Retailers |
+| --- | --- | --- | --- |
+| View balances and their history | `GET /accounts/{accountId}/balances`, `GET /balances/{balanceId}/history` | Yes | Yes |
+| Create a balance | `POST /accounts/{accountId}/balances` | No | Yes |
+| Edit name, dates, or memo | `PATCH /accounts/{accountId}/balances/{balanceId}` | No | Yes |
+| Add or remove funds | `POST /accounts/{accountId}/balances/{balanceId}/add-funds` | No | Yes |
+| Link campaigns | `POST /balances/{balanceId}/campaigns/append` | Yes | Yes |
+| Unlink campaigns | `POST /balances/{balanceId}/campaigns/delete` | Yes, except from retailer-budgets balances | Yes, except from retailer-budgets balances |
 
-* 🟢 **Active:** The balance has available funds, and today's date is within its start and end dates. Linked campaigns can spend from this balance.
+Retailers can edit only balances with `privateMarketBillingType` set to `billByRetailer`, which covers every balance created through the API. Balances set to `billByCriteo` were created in Commerce Max and can only be edited there.
 
-* 🕒  **Scheduled:** The balance has available funds, but its start date is in the future. Linked campaigns cannot spend from this balance yet.
+## Balance statuses
 
-* 🔴 **Ended:** The balance has either run out of funds or is past its end date. Linked campaigns can no longer spend from this balance.
-
-***
+| Status | Meaning |
+| --- | --- |
+| `active` | Has funds and today is between its start and end dates. Linked campaigns can spend. |
+| `scheduled` | Has funds, but its start date is in the future. Linked campaigns can't spend yet. |
+| `ended` | Out of funds or past its end date. Linked campaigns can't spend. |
 
 <Note>
-  **CMax Help Center**  
-  Learn more about balances in the [CMax Help Center](https://help.retailmedia.criteo.com/kb/guide/en/about-balances-dp2VSA0YeL/Steps/973366)
+  Learn more about balances in the [CMax Help Center](https://help.retailmedia.criteo.com/kb/guide/en/about-balances-dp2VSA0YeL/Steps/973366).
 </Note>
-
-***
-
-<br />
-
 
 ## What's next
 
-* [Balances Endpoints](/retail-media/docs/balances-endpoints)
+- [Balances Endpoints](/retail-media/docs/balances-endpoints)
+- [Campaigns Endpoints](/retail-media/docs/campaigns-endpoints)
+- [Retailer Search](/retail-media/docs/retailer-search)
