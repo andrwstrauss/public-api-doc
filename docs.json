@@ -272,7 +272,6 @@
                           "retail-media/docs/category-search"
                         ]
                       },
-                      "retail-media/docs/retailer-budgets",
                       {
                         "group": "Demand Side Analytics (DSP)",
                         "root": "retail-media/docs/analytics",
@@ -525,7 +524,6 @@
                           "retail-media/docs/category-search"
                         ]
                       },
-                      "retail-media/docs/retailer-budgets",
                       {
                         "group": "Demand Side Analytics (DSP)",
                         "root": "retail-media/docs/analytics",
@@ -2631,6 +2629,7 @@
     }
   },
   "redirects": [
+    { "source": "/retail-media/docs/retailer-budgets", "destination": "/retail-media/docs/balances#balance-types" },
     { "source": "/retail-media/v2026-preview", "destination": "/retail-media/v2026-preview/docs/introduction-to-preview" },
     { "source": "/retail-media/v2025.10", "destination": "/retail-media/v2025.10/docs/welcome-to-criteo" },
     { "source": "/retail-media/v2025.07", "destination": "/retail-media/v2025.07/docs/welcome-to-criteo" },
