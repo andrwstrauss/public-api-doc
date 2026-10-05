@@ -3,29 +3,25 @@ title: "Account"
 original_file: "to-migrate/criteo-dev-portal-full-export/merged_export/Retail_Media/v2026_01/docs/Guides for Retail Media API/account/index.md"
 ---
 
-import { InlineImage } from "/snippets/InlineImage.jsx";
+An account holds your Retail Media inventory or campaigns. Criteo creates accounts; contact your account representative to have one set up.
 
-<Frame>
-  ![860dcb7 l1 account](/images/retail-media/docs/860dcb7-l1-account.png)
-</Frame>
+## Account types
 
-A Retail Media Platform (RMP) account is unique, and the Criteo API enables external applications to make calls to the account once API access has been granted. The account endpoints are synchronized with the RMP platform and API, meaning any changes made through the API will be immediately reflected in the RMP account.
+Retailer accounts manage supply. Brand and seller accounts both run campaigns; they differ only in how their access is configured.
 
-**Currently, accounts are created by Criteo. Please contact your account representative if you need an account to be set up.**
+| Account type | `type` | `subtype` | Purpose | Access configured by |
+| --- | --- | --- | --- | --- |
+| **Retailer** | `supply` | `null` | Manages the retailer's own advertising inventory | The retailer's sites and inventory |
+| **Brand** | `demand` | `brand` | Creates and manages campaigns | The [brands](/retail-media/docs/brands) associated with the account |
+| **Seller** | `demand` | `seller` | Creates and manages campaigns | The marketplace [sellers](/retail-media/docs/sellers) associated with the account |
 
-The Accounts endpoints will allow you to:
+## Account limits
 
-- Check for available retailers you can serve ads on
-- Look out for brands available witin your account
-- Access your account basic settings
+Every account is limited to a set of countries and one billing currency. Criteo sets both when it creates the account, and neither can be changed through the API.
 
 <Note>
-  You can learn more about Accounts in our [CMax Help Center](https://help.retailmedia.criteo.com/kb/guide/en/about-accounts-3c39AcNsJx/Steps/969774).
+  Learn more about accounts in the [CMax Help Center](https://help.retailmedia.criteo.com/kb/guide/en/about-accounts-3c39AcNsJx/Steps/969774).
 </Note>
-
----
-
-<br />
 
 ## What's next
 
@@ -34,4 +30,4 @@ The Accounts endpoints will allow you to:
 - [Account Fees (Private Market)](/retail-media/docs/account-fees)
 - [Brands](/retail-media/docs/brands)
 - [Sellers](/retail-media/docs/sellers)
-- [Retailers](/retail-media/v2025.07/docs/retailers)
+- [Retailers](/retail-media/docs/retailers)
